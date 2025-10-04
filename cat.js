@@ -1,15 +1,15 @@
-let events = eventsData; // Usa la variable del nuevo archivo JS
+let events = eventsData; 
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 const ITEMS_PER_PAGE = 10;
 let currentPage = 1;
 
-// --- Router ---
+
 window.addEventListener('hashchange', router);
 window.addEventListener('load', router);
 
 function router() {
-  if (events.length === 0) return; // Espera a que cargue el JSON
+  if (events.length === 0) return; 
   const hash = location.hash || '#/catalog';
   const [path] = hash.slice(2).split('?');
 
@@ -25,7 +25,7 @@ function router() {
   }
 }
 
-// --- Catálogo con paginación ---
+
 function renderCatalog() {
   const container = document.getElementById('app');
   if (!container) return;
@@ -75,7 +75,7 @@ function goToPage(page) {
   renderCatalog();
 }
 
-// --- Detalle evento ---
+
 function renderEventDetail(id) {
   const e = events.find(ev => ev.id === id);
   const container = document.getElementById('app');
@@ -102,7 +102,7 @@ function renderEventDetail(id) {
   `;
 }
 
-// --- Carrito ---
+
 function addToCart(id) {
   const e = events.find(ev => ev.id === id);
   const qtyInput = document.getElementById('cantidad');
@@ -155,7 +155,6 @@ function renderCart() {
   <a href="#/catalog">Seguir comprando</a>`;
 }
 
-// --- Favoritos ---
 function toggleFavorite(id) {
   if (favorites.includes(id)) {
     favorites = favorites.filter(fav => fav !== id);
@@ -185,7 +184,7 @@ function renderFavorites() {
   `).join('') + `<a href="#/catalog">Volver</a>`;
 }
 
-// --- Compartir URL ---
+
 function copyURL(id) {
   const url = `${location.origin}${location.pathname}#/event/${id}`;
   if (navigator.clipboard) {
@@ -195,4 +194,5 @@ function copyURL(id) {
   } else {
     alert('Tu navegador no soporta copiar al portapapeles');
   }
+
 }
